@@ -12,10 +12,15 @@ class Portfolio:
 
     def remove_stock(self, symbol, quantity):
         if symbol in self.stocks:
-            if quantity >= self.stocks[symbol]['quantity']:
-                del self.stocks[symbol]
+            confirm = input(f"Are you sure you want to remove {quantity} shares of {symbol}? (yes/no): ").lower()
+            if confirm == 'yes':
+                if quantity >= self.stocks[symbol]['quantity']:
+                    del self.stocks[symbol]
+                else:
+                    self.stocks[symbol]['quantity'] -= quantity
+                print(f"{quantity} shares of {symbol} removed from portfolio.")
             else:
-                self.stocks[symbol]['quantity'] -= quantity
+                print("Operation canceled.")
         else:
             print("Stock not found in portfolio")
 
